@@ -19,7 +19,7 @@ In `configuration.nix`
 ```nix
 nix.registry."node".to = {
   type = "github";
-  owner = "andyrichardson";
+  owner = "Aethusx";
   repo = "nix-node";
 };
 ```
