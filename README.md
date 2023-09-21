@@ -71,15 +71,23 @@ Update [CI build](https://github.com/andyrichardson/nix-node/blob/master/.github
 
 ## Garbage Collector cleans up builds
 
-When using ```sh nix-collect-garbage -d``` it also cleans all our node builds, to prevent we can do a 'root' syslink.
+When using 
+```sh
+nix-collect-garbage -d
+```
+it also cleans all our node builds, to prevent we can do a 'root' syslink.
 
 First find the node-js instance in /nix/store/, you can use this command:
 
-``sh find /nix/store -maxdepth 1 -name '*node*'``
+```sh
+find /nix/store -maxdepth 1 -name '*node*'
+```
 
 Then use this command to create root syslink
 
-``sh nix-store --add-root /opt/nodejs-root --indirect --realise /nix/store/b2xyc0fwax961h6bja0j371zg7b0mvnr-nodejs-16.20.2``
+```sh
+nix-store --add-root /opt/nodejs-root --indirect --realise /nix/store/b2xyc0fwax961h6bja0j371zg7b0mvnr-nodejs-16.20.2
+```
 
 ``/opt/nodejs-root`` can be anything, ``/nix/store/b2xyc0fwax961h6bja0j371zg7b0mvnr-nodejs-16.20.2`` is our nodejs path, replace it with whatever nodejs instance you want to keep from getting cleaned by garbage collector
 
