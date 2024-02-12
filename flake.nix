@@ -13,6 +13,12 @@
               icu = icu68;
               python = python3;
             };
+          v20_11_0 = (buildNodejs {
+            enableNpm = true;
+            version = "20.11.0";
+            sha256 = "0h0bjpbnidlsag5h1lbdd55nliv9xmdakr352wzwajdhxsz7x01i";
+            patches = lib.optional stdenv.isDarwin "${nixpkgs}/pkgs/development/web/nodejs/./bypass-xcodebuild.diff";
+          });
           v16_20_2 = (buildNodejs {
             enableNpm = true;
             version = "16.20.2";
@@ -404,6 +410,11 @@
             patches = lib.optional stdenv.isDarwin "${nixpkgs}/pkgs/development/web/nodejs/./bypass-xcodebuild.diff";
           });
         in rec {
+          "20" = v20_11_0.overrideAttrs (prev: {
+            passthru = {
+              "11"."0" = v20_11_0;
+            };
+          });   
           "16" = v16_20_2.overrideAttrs (prev: {
             passthru = {
               "20"."2" = v16_20_2;
